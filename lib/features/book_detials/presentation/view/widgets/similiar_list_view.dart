@@ -13,9 +13,7 @@ class SimiliarBookList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context,index){
               return CustomBooKItem();
-            },
-
-            itemCount: 10),
+            },  itemCount: 10),
       );
   }
 }

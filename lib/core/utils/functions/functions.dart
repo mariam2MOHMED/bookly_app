@@ -4,6 +4,7 @@ import 'package:booklyapp/features/splash/presentation/view/screens/splash_scree
 import 'package:go_router/go_router.dart';
 
 import '../../../features/book_detials/presentation/view/screens/book_detials.dart';
+import '../../../features/search/presentation/view/screens/search_screen.dart';
 
 abstract class AppRouter {
   static const kHomeView = '/homeView';
@@ -20,7 +21,9 @@ abstract class AppRouter {
       GoRoute(
         path: kHomeView,
         builder: (context, state) => const HomeScreen()),
-
+      GoRoute(
+          path: kSearchView,
+          builder: (context, state) => const SearchScreen()),
 GoRoute(path: kBookDetailsView,
 
 builder: (context,state)=>const BookDetialsScreen())
