@@ -13,7 +13,7 @@ class SearchListBooks extends StatelessWidget {
         return Padding(
 
           padding:  EdgeInsets.symmetric(vertical: 10),
-          child: BestSellerItem(),
+       //   child: BestSellerItem(),
         );
       },itemCount: 10,);
   }

@@ -37,26 +37,26 @@ class CustomViewBody extends StatelessWidget {
       ],
     );
 
-      Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomAppBar(),
-        SizedBox(height: 20.0,),
-        CustomBookList(),
-        SizedBox(height: 30.0,),
-Padding(
-  padding:  EdgeInsets.symmetric(horizontal: 20.0),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text("Best Seller",style: Styles.text18,),
-      SizedBox(height: 30.0,),
-      BestSellerItem(),
-
-    ],
-  ),
-)
-      ],
-    );
+//       Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         CustomAppBar(),
+//         SizedBox(height: 20.0,),
+//         CustomBookList(),
+//         SizedBox(height: 30.0,),
+// Padding(
+//   padding:  EdgeInsets.symmetric(horizontal: 20.0),
+//   child: Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       Text("Best Seller",style: Styles.text18,),
+//       SizedBox(height: 30.0,),
+//       BestSellerItem(),
+//
+//     ],
+//   ),
+// )
+//       ],
+//     );
   }
 }
