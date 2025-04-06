@@ -18,8 +18,9 @@ class _BookDetialsScreenState extends State<BookDetialsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //
     context.read<FetchSimiliarBooksCubit>().fetchSimiliarBooks(widget.bookModel
-        .volumeInfo!.categories![0]);
+        .volumeInfo?.categories?[0]??"Meteorology");
   }
   @override
   Widget build(BuildContext context) {
@@ -31,4 +32,13 @@ class _BookDetialsScreenState extends State<BookDetialsScreen> {
       ),
     );
   }
+}
+
+
+String getCategoryOrDefault(BookModel model,int index) {
+  final categories = model.volumeInfo?.categories;
+  if (categories != null && categories.isNotEmpty && categories.isNotEmpty) {
+    return categories[index];
+  }
+  return "Meteorology";
 }

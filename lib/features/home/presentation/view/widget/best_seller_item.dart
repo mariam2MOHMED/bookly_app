@@ -54,7 +54,7 @@ BookModel bookModel;
                       ),),
                   ),
                  const SizedBox(height: 3,),
-                  Text(bookModel.volumeInfo!.authors![0],style: Styles.text14,),
+                  Text(bookModel.volumeInfo?.authors?[0]??"JK Rowling",style: Styles.text14,),
                   const SizedBox(height: 3,),
                   Row(
                     children: [
@@ -65,8 +65,8 @@ BookModel bookModel;
                       ),),
                       Spacer(),
                       RatingWidget(
-                        rating: bookModel.volumeInfo!.maturityRating!,
-                        count: bookModel.volumeInfo!.pageCount!,
+                        rating: bookModel.volumeInfo!.maturityRating??"0",
+                        count: bookModel.volumeInfo!.pageCount??250,
                       )
                     ],
                   )

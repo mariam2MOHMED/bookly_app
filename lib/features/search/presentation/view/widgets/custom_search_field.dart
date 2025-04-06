@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomSearchField extends StatelessWidget {
-  const CustomSearchField({super.key});
-
+   CustomSearchField({required this.onChanged});
+  void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return TextField(
-      
+      onChanged: onChanged,
       decoration: InputDecoration(
         hintText: 'Search..',
+
         suffixIcon: Opacity(opacity: 0.7,
         child: Icon(Icons.search)),
         hintStyle: TextStyle(

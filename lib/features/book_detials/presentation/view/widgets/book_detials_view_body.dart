@@ -104,11 +104,12 @@ import 'package:booklyapp/features/home/data/models/book_model.dart';
 import 'package:booklyapp/features/home/presentation/view/widget/custom_book_item.dart';
 import 'package:booklyapp/features/home/presentation/view/widget/rating_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookDetialsViewBody extends StatelessWidget {
   final BookModel bookModel;
-
-  const BookDetialsViewBody({super.key, required this.bookModel});
+  const BookDetialsViewBody
+      ({super.key, required this.bookModel});
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +120,7 @@ class BookDetialsViewBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.18,
+              vertical: MediaQuery.of(context).size.width*0.05
             ),
             child: CustomBooKItem(
               image: bookModel.volumeInfo!.imageLinks!.thumbnail ??
@@ -130,6 +132,8 @@ class BookDetialsViewBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               bookModel.volumeInfo!.title!,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: Styles.text30,
             ),
@@ -157,32 +161,37 @@ class BookDetialsViewBody extends StatelessWidget {
               children: [
                 Expanded(
                   child: CustomTxtBtn(
-                    txt: "Free\$",
+                    txt: "Free",
                     bg: Colors.white,
                     txtColor: Colors.black,
                     radius: const BorderRadius.only(
                       topLeft: Radius.circular(16.0),
                       bottomLeft: Radius.circular(16.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _launchUrl(bookModel.volumeInfo!.infoLink!);
+                    },
                   ),
                 ),
                 Expanded(
                   child: CustomTxtBtn(
-                    txt: "Preview",
+                    txt:getTxt(  BookModel ),
                     bg: const Color(0xffEF8262),
                     txtColor: Colors.white,
                     radius: const BorderRadius.only(
                       topRight: Radius.circular(16.0),
                       bottomRight: Radius.circular(16.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _launchUrl(bookModel.volumeInfo!.previewLink!);
+                    },
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 40.0), // Replaced Expanded with SizedBox
+          const SizedBox(height: 40.0),
+          // Replaced Expanded with SizedBox
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -199,5 +208,19 @@ class BookDetialsViewBody extends StatelessWidget {
         ],
       ),
     );
+  }
+  Future<void> _launchUrl(String url) async {
+    final _url=Uri.parse(url);
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  String getTxt( BookModel ) {
+    if(bookModel.volumeInfo!.previewLink==null){
+      return "Not Avaliable";
+    }else{
+      return "Preview";
+    }
   }
 }
