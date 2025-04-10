@@ -25,3 +25,12 @@ class LoginFailure extends AuthState {
 
   LoginFailure({required this.error});
 }
+class ForgetPasswordLoading extends AuthState {}
+class ForgetPasswordSucess extends AuthState {
+
+}
+class ForgetPasswordFailure extends AuthState {
+  final String error;
+
+  ForgetPasswordFailure({required this.error});
+}

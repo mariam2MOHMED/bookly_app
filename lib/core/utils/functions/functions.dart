@@ -1,5 +1,6 @@
 
 import 'package:booklyapp/core/utils/services_locator.dart';
+import 'package:booklyapp/features/auth/presentation/screens/forget_password.dart';
 import 'package:booklyapp/features/auth/presentation/screens/login_screen.dart';
 import 'package:booklyapp/features/auth/presentation/screens/register_screen.dart';
 import 'package:booklyapp/features/home/data/models/book_model.dart';
@@ -19,11 +20,17 @@ abstract class AppRouter {
   static const kSearchView = '/searchView';
   static const kregisterView = '/RegisterView';
   static const kloginView = '/LoginView';
+  //ForgetPassword
+  static const kforgetPassordView = '/ForgetPassword';
   static final router = GoRouter(
     routes: [
       GoRoute(
         path: '/',
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path:kforgetPassordView,
+        builder: (context, state) =>  ForgetPassword(),
       ),
       GoRoute(
         path: kregisterView,

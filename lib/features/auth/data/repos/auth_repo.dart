@@ -5,5 +5,5 @@ import 'package:dartz/dartz.dart';
 abstract class AuthRepo{
   Future<Either<ErrorFirebase,UserModel>>createUser(String name,String email,String password);
   Future<Either<ErrorFirebase,UserModel>>login(String email,String password);
- // Future<UserModel?> getUserInfo();
+  Future<Either<ErrorFirebase,void>> forgetPassword(String email);
 }

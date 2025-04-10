@@ -40,4 +40,14 @@ result.fold((l) {
       emit(LoginSucess(userModel: user));
     });
   }
+  Future<void> resetPassword(String email)async{
+
+  var result=await authRepo.forgetPassword(email);
+  emit(ForgetPasswordLoading());
+  result.fold((failure) {
+    emit(ForgetPasswordFailure(error: failure.errorMessage));
+  }, (r)  {
+    emit(ForgetPasswordSucess());
+  });
+  }
 }

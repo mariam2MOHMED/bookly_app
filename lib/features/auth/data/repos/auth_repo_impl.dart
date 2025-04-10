@@ -53,6 +53,21 @@ id: crediental.user!.uid,
     }
   }
 
+  @override
+  Future<Either<ErrorFirebase, void>> forgetPassword(String email)async {
+ try{
+   final crediential=await FirebaseAuth.instance;
+   crediential.sendPasswordResetEmail(email: email);
+   return right(null);
+ }catch(e){
+   if(e is FirebaseAuthException){
+     return left(ErrorFirebase.fromFirebase(e));
+   }else{
+     return left(ErrorFirebase(errorMessage: e.toString()));
+   }
+ }
+  }
+
 
 }
  CollectionReference<UserModel>  getUsersCollection(){

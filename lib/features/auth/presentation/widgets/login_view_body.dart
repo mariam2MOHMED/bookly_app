@@ -1,6 +1,8 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:booklyapp/core/utils/functions/functions.dart';
 import 'package:booklyapp/features/auth/presentation/widgets/custom_btn.dart';
 import 'package:booklyapp/features/auth/presentation/widgets/custom_txt_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +19,29 @@ class LoginViewBody extends StatelessWidget {
     var password = TextEditingController();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is LoginSucess){
+          AnimatedSnackBar.rectangle(
+            'Success',
+            '${state.userModel.name} logined sucessfuly',
+            type: AnimatedSnackBarType.success,
+            brightness: Brightness.light,
+          ).show(
+            context,
+          );
+        }else if(state is LoginLoading){
+          LinearProgressIndicator(
+            color: Colors.white,
+          );
+        }else if(state is LoginFailure){
+          AnimatedSnackBar.rectangle(
+            'Failure',
+            '${state.error}',
+            type: AnimatedSnackBarType.error,
+            brightness: Brightness.light,
+          ).show(
+            context,
+          );
+        }
       },
       builder: (context, state) {
         return Padding(
@@ -55,14 +79,19 @@ class LoginViewBody extends StatelessWidget {
                     isPassword: true,
                     controller: password),
                 const SizedBox(height: 30.0,),
-                Align(alignment: Alignment.centerLeft,
-                  child: Opacity(
-                    opacity: 0.7,
-                    child: Text("Forget Password", style: TextStyle(
-                        fontFamily: kGtSectraFine,
-                        fontSize: 24,
-                        color: Colors.white
-                    ),),),
+                GestureDetector(
+                  onTap: (){
+                    GoRouter.of(context).push(AppRouter.kforgetPassordView);
+                  },
+                  child: Align(alignment: Alignment.centerLeft,
+                    child: Opacity(
+                      opacity: 0.7,
+                      child: Text("Forget Password", style: TextStyle(
+                          fontFamily: kGtSectraFine,
+                          fontSize: 24,
+                          color: Colors.white
+                      ),),),
+                  ),
                 ),
                 const SizedBox(height: 20.0,),
                 customBtnAuth(onPressed: () {
@@ -88,9 +117,11 @@ class LoginViewBody extends StatelessWidget {
                       opacity: 0.7,
                       child: GestureDetector(
                         onTap: () {
-                          GoRouter.of(context).push(AppRouter.kregisterView);
+                          GoRouter.of(context).
+                          push(AppRouter.kregisterView);
                         },
-                        child: Text(" Sign UP", style: TextStyle(
+                        child: Text(" Sign UP",
+                          style: TextStyle(
                             fontFamily: kGtSectraFine, fontSize: 24.0,
                             color: Colors.white
                         ),),

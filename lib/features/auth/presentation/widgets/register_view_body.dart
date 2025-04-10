@@ -1,3 +1,4 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:booklyapp/core/utils/app_colors.dart';
 import 'package:booklyapp/core/utils/constants.dart';
 import 'package:booklyapp/core/utils/functions/functions.dart';
@@ -21,7 +22,29 @@ class CustomViewBody extends StatelessWidget {
     var password = TextEditingController();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        // TODO: implement listener
+    if(state is RegisterSucess){
+      AnimatedSnackBar.rectangle(
+        'Success',
+        '${state.userModel.name} logined sucessfuly',
+        type: AnimatedSnackBarType.success,
+        brightness: Brightness.light,
+      ).show(
+        context,
+      );
+    }else if(state is RegisterLoading){
+       LinearProgressIndicator(
+         color: Colors.white,
+       );
+    }else if(state is RegisterFailure){
+      AnimatedSnackBar.rectangle(
+        'Failure',
+        '${state.error}',
+        type: AnimatedSnackBarType.error,
+        brightness: Brightness.light,
+      ).show(
+        context,
+      );
+    }
       },
       builder: (context, state) {
         return Padding(
