@@ -142,7 +142,9 @@ class BookDetialsViewBody extends StatelessWidget {
           Opacity(
             opacity: 0.7,
             child: Text(
-              bookModel.volumeInfo!.authors![0],
+              bookModel.volumeInfo!.authors?[0]??"",
+              textAlign: TextAlign.center,
+              maxLines: 2,
               style: Styles.text18.copyWith(fontStyle: FontStyle.italic),
             ),
           ),
@@ -203,7 +205,9 @@ class BookDetialsViewBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          const SimiliarBookList(),
+           SimiliarBookList(
+             bookModel: bookModel,
+           ),
           const SizedBox(height: 20.0), // Optional padding at the bottom
         ],
       ),

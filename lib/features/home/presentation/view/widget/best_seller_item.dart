@@ -20,7 +20,7 @@ BookModel bookModel;
               extra: bookModel);
         },
         child: SizedBox(
-        height: 135,
+        height: 140,
         child: Row(
           children: [
             ClipRRect(
@@ -35,7 +35,7 @@ BookModel bookModel;
                     )),
                     errorWidget: (context,url,error)=>Icon(Icons.image_not_supported_rounded,
                       color: Colors.white,),
-                    imageUrl: bookModel.volumeInfo!.imageLinks!.thumbnail!)
+                    imageUrl: bookModel.volumeInfo!.imageLinks?.thumbnail??"http://books.google.com/books/content?id=SI7fAAAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api")
 
               ),
             ),
@@ -54,7 +54,8 @@ BookModel bookModel;
                       ),),
                   ),
                  const SizedBox(height: 3,),
-                  Text(bookModel.volumeInfo?.authors?[0]??"JK Rowling",style: Styles.text14,),
+                  Text(bookModel.volumeInfo?.authors?[0]??
+                      "JK Rowling",maxLines: 1,overflow: TextOverflow.ellipsis,style: Styles.text14,),
                   const SizedBox(height: 3,),
                   Row(
                     children: [

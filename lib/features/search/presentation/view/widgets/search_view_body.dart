@@ -1,3 +1,4 @@
+import 'package:booklyapp/features/search/presentation/view/widgets/no_search_items.dart';
 import 'package:booklyapp/features/search/presentation/managers/search_cubit/search_cubit.dart';
 import 'package:booklyapp/features/search/presentation/view/widgets/custom_search_field.dart';
 import 'package:booklyapp/features/search/presentation/view/widgets/search_list_books.dart';
@@ -19,13 +20,22 @@ class SearchViewBody extends StatelessWidget {
               builder: (context, state) {
                 return CustomSearchField(
                   onChanged: (query) {
-context.read<SearchCubit>().getSearch(query);
+                    context.read<SearchCubit>().getSearch(query);
                   },
                 );
               },
             ),
             SizedBox(height: 16.0,),
-            Expanded(child: SearchListBooks())
+
+              BlocBuilder<SearchCubit, SearchState>(
+                builder: (context, state) {
+
+                  return BlocProvider.of<SearchCubit>(context).searchs.isEmpty?
+                noSearchItems():  Expanded(child: SearchListBooks());
+                },
+              )
+
+
           ],
         ),
       );
